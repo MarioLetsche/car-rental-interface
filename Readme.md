@@ -11,9 +11,9 @@ The project can be started with
 
 *./gradlew bootrun*
 
-The project can be manipulated in different ways. You can either visit:
+The project can be manipulated in different ways. You can either visit the OpenAPI:
 
-http://localhost:8080/car-rental-interface/swagger-ui/index.htm
+http://localhost:8080/car-rental-interface/swagger-ui/index.html
 
 or use the Angular frontend in the project car-rental.
 
