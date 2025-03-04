@@ -30,5 +30,6 @@ public class Customer {
         this.firstName = customerDTO.firstName();
         this.lastName = customerDTO.lastName();
         this.email = customerDTO.email();
+        this.customerId = customerDTO.customerId();
     }
 }

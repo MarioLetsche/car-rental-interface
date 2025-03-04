@@ -29,5 +29,6 @@ public class Car {
         this.brand = carDTO.brand();
         this.model = carDTO.model();
         this.inRental = carDTO.inRental();
+        this.carId = carDTO.carId();
     }
 }
