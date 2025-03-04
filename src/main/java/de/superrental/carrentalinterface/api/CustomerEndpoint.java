@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,12 +35,29 @@ public class CustomerEndpoint {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Added or updated customer."),
+            @ApiResponse(responseCode = "201", description = "Added customer."),
+            @ApiResponse(responseCode = "409", description = "Customer ID was set for creation!"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    @PutMapping(value = "/customers")
+    @PostMapping(value = "/customers")
     public ResponseEntity<Void> addCustomer(@RequestBody CustomerDTO customerDTO) {
-        LOGGER.info("Updating or adding customer: {}", customerDTO);
+        if (customerDTO.customerId() != null) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        LOGGER.info("Adding customer: {}", customerDTO);
+        return this.customerService.saveCustomer(customerDTO);
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Updated customer."),
+            @ApiResponse(responseCode = "400", description = "Bad Request. Maybe no Customer ID was set.")
+    })
+    @PutMapping(value = "/customers")
+    public ResponseEntity<Void> updateCustomer(@RequestBody CustomerDTO customerDTO) {
+        if (customerDTO.customerId() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        LOGGER.info("Updating customer: {}", customerDTO);
         return this.customerService.saveCustomer(customerDTO);
     }
 

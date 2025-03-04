@@ -35,11 +35,7 @@ public class RentalService {
     }
 
     public List<Rental> getAllRentalsByCustomerId(Long customerId) {
-        List<Rental> rentals = (List<Rental>) rentalRepository.findAll();
-        return rentals
-                .stream()
-                .filter(rental -> rental.getCustomer().getCustomerId().equals(customerId))
-                .toList();
+        return rentalRepository.findByCustomer_customerId(customerId);
     }
 
     public ResponseEntity<Void> addRental(RentalDTO rentalDTO) {

@@ -40,6 +40,9 @@ public class CustomerService {
         try {
             Customer customer = new Customer(customerDTO);
             customerRepository.save(customer);
+            if (customerDTO.customerId() == null) {
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            }
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (RuntimeException e) {
             LOGGER.error("Failed to save customer. {}", e.getMessage());
@@ -47,6 +50,7 @@ public class CustomerService {
         }
     }
 
+    // There seems to be a Transactional annotation that could make this work smoother
     public ResponseEntity<Void> deleteCustomer(Long customerId) {
         try {
             customerRepository.deleteById(customerId);
