@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,12 +35,29 @@ public class RentalEndpoint {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Added or updated rental."),
+            @ApiResponse(responseCode = "201", description = "Added rental."),
+            @ApiResponse(responseCode = "409", description = "Rental ID was set during creation!"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    @PutMapping(value = "/rentals")
+    @PostMapping(value = "/rentals")
     public ResponseEntity<Void> addRental(@RequestBody RentalDTO rentalDTO) {
-        LOGGER.info("Adding or updating rental {}", rentalDTO);
+        if (rentalDTO.rentalId() != null) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        LOGGER.info("Adding rental {}", rentalDTO);
+        return rentalService.addRental(rentalDTO);
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Updated rental."),
+            @ApiResponse(responseCode = "400", description = "Bad Request. Maybe Rental ID was set during creation.")
+    })
+    @PutMapping(value = "/rentals")
+    public ResponseEntity<Void> updateRental(@RequestBody RentalDTO rentalDTO) {
+        if (rentalDTO.rentalId() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        LOGGER.info("Updating rental {}", rentalDTO);
         return rentalService.addRental(rentalDTO);
     }
 

@@ -36,6 +36,9 @@ public class CarService {
         try {
             Car car = new Car(carDTO);
             carRepository.save(car);
+            if (carDTO.carId() == null) {
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            }
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (RuntimeException e) {
             LOGGER.error("Failed to save car. {}", e.getMessage());

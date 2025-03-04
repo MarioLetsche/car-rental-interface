@@ -44,6 +44,9 @@ public class RentalService {
             Car car = carService.getCarById(rentalDTO.carId());
             Rental rental = new Rental(customer, car, rentalDTO.mileage());
             rentalRepository.save(rental);
+            if (rentalDTO.rentalId() == null) {
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            }
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (RuntimeException e) {
             LOGGER.error(e.getMessage());

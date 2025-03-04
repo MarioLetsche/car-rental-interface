@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,12 +35,29 @@ public class CarEndpoint {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Added or updated car."),
+            @ApiResponse(responseCode = "201", description = "Added car."),
+            @ApiResponse(responseCode = "409", description = "Car ID was set for creation!"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    @PutMapping(value = "/cars")
+    @PostMapping(value = "/cars")
     public ResponseEntity<Void> addCar(@RequestBody CarDTO carDTO) {
-        LOGGER.info("Adding or updating car {}", carDTO);
+        if (carDTO.carId() != null) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        LOGGER.info("Adding car {}", carDTO);
+        return carService.addCar(carDTO);
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Updated car."),
+            @ApiResponse(responseCode = "400", description = "Bad Request. Maybe Car ID was not set.")
+    })
+    @PutMapping(value = "/cars")
+    public ResponseEntity<Void> updateCar(@RequestBody CarDTO carDTO) {
+        if (carDTO.carId() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        LOGGER.info("Updating car {}", carDTO);
         return carService.addCar(carDTO);
     }
 
