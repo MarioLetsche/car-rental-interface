@@ -4,6 +4,8 @@ Needs Java Version 17 or 21
 
 ## Database Setup
 
+In some instances you need to add the path/To/Postgres/bin to your environment variables to make the 'psql' command work.
+
 In the src/main/resources/static folder you can find the setup files for the postgres database. Run them with their command (found in the files) in the following order:
 
 - database_setup.sql
