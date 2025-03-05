@@ -1,6 +1,6 @@
 # car-rental-interface
 
-Needs Java Version 17 or 21
+Needs Java Version 21
 Needs a valid Postgres installation
 
 ## Database Setup
