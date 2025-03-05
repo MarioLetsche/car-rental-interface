@@ -15,7 +15,7 @@ The project can be manipulated in different ways. You can either visit the OpenA
 
 http://localhost:8080/car-rental-interface/swagger-ui/index.html
 
-or use the Angular frontend in the project car-rental.
+or use the Angular frontend in the project car-rental here: https://github.com/MarioLetsche/car-rental.
 
 ## Known Issue
 
