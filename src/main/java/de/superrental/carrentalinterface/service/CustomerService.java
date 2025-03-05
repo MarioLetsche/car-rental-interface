@@ -32,7 +32,7 @@ public class CustomerService {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
-    public Customer getCustomerById(Long customerId) throws CustomerNotFoundException {
+    public Customer getCustomerById(Integer customerId) throws CustomerNotFoundException {
         return customerRepository.findById(customerId).orElseThrow(() -> new CustomerNotFoundException("Customer with id " + customerId + " not found"));
     }
 
@@ -51,7 +51,7 @@ public class CustomerService {
     }
 
     // There seems to be a Transactional annotation that could make this work smoother
-    public ResponseEntity<Void> deleteCustomer(Long customerId) {
+    public ResponseEntity<Void> deleteCustomer(Integer customerId) {
         try {
             customerRepository.deleteById(customerId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

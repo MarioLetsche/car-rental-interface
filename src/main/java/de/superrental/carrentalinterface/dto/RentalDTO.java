@@ -1,8 +1,8 @@
 package de.superrental.carrentalinterface.dto;
 
 public record RentalDTO(
-        Long customerId,
-        Long carId,
+        Integer customerId,
+        Integer carId,
         Integer mileage,
         Integer rentalId
 ) {}

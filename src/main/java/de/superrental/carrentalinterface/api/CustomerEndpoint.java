@@ -66,7 +66,7 @@ public class CustomerEndpoint {
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
     @DeleteMapping(value = "/customers")
-    public ResponseEntity<Void> deleteCustomer(@RequestBody Long customerId) {
+    public ResponseEntity<Void> deleteCustomer(@RequestBody Integer customerId) {
         LOGGER.info("Delete customer with id: {}", customerId);
         return this.customerService.deleteCustomer(customerId);
     }

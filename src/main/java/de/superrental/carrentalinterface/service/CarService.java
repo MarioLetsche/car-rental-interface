@@ -28,7 +28,7 @@ public class CarService {
         return new ResponseEntity<>(cars, HttpStatus.OK);
     }
 
-    public Car getCarById(Long carId) throws RuntimeException {
+    public Car getCarById(Integer carId) throws RuntimeException {
         return carRepository.findById(carId).orElseThrow(() -> new CarNotFoundException("Car with id " + carId + " not found"));
     }
 
@@ -46,7 +46,7 @@ public class CarService {
         }
     }
 
-    public ResponseEntity<Void> deleteCar(Long carId) {
+    public ResponseEntity<Void> deleteCar(Integer carId) {
         try {
             carRepository.deleteById(carId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

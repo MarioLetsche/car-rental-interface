@@ -65,7 +65,7 @@ public class CarEndpoint {
             @ApiResponse(responseCode = "204", description = "Removed car.")
     })
     @DeleteMapping(value = "/cars")
-    public ResponseEntity<Void> removeCar(@RequestBody Long carId) {
+    public ResponseEntity<Void> removeCar(@RequestBody Integer carId) {
         LOGGER.info("Removing car with id: {}", carId);
         return carService.deleteCar(carId);
     }

@@ -65,7 +65,7 @@ public class RentalEndpoint {
             @ApiResponse(responseCode = "204", description = "Deleted rental.")
     })
     @DeleteMapping(value = "/rentals")
-    public ResponseEntity<Void> removeRental(@RequestBody Long rentalId) {
+    public ResponseEntity<Void> removeRental(@RequestBody Integer rentalId) {
         LOGGER.info("Removing rental with id: {}", rentalId);
         return rentalService.deleteRental(rentalId);
     }

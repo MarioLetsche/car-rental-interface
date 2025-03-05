@@ -34,7 +34,7 @@ public class RentalService {
         return new ResponseEntity<>(rentals, HttpStatus.OK);
     }
 
-    public List<Rental> getAllRentalsByCustomerId(Long customerId) {
+    public List<Rental> getAllRentalsByCustomerId(Integer customerId) {
         return rentalRepository.findByCustomer_customerId(customerId);
     }
 
@@ -54,7 +54,7 @@ public class RentalService {
         }
     }
 
-    public ResponseEntity<Void> deleteRental(Long rentalId) {
+    public ResponseEntity<Void> deleteRental(Integer rentalId) {
         rentalRepository.deleteById(rentalId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
