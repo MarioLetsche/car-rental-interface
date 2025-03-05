@@ -62,6 +62,7 @@ public class CustomerService {
             if (!rentalsWithCustomerId.isEmpty()) {
                 rentalsWithCustomerId.forEach(rental -> rentalService.deleteRental(rental.getRentalId()));
                 customerRepository.deleteById(customerId);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
