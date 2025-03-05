@@ -1,6 +1,7 @@
 # car-rental-interface
 
 Needs Java Version 17 or 21
+Needs a valid Postgres installation
 
 ## Database Setup
 
@@ -12,8 +13,6 @@ In the src/main/resources/static folder you can find the setup files for the pos
 - setup.sql
 - data.sql
 - triggers.sql
-
-You need an Postgres installation to run these commands.
 
 ## Setup
 
