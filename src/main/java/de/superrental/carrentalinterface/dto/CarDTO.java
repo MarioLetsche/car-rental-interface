@@ -4,5 +4,5 @@ public record CarDTO(
         String brand,
         String model,
         Boolean inRental,
-        Long carId
+        Integer carId
 ) {}

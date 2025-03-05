@@ -42,7 +42,7 @@ public class RentalService {
         try {
             Customer customer = customerService.getCustomerById(rentalDTO.customerId());
             Car car = carService.getCarById(rentalDTO.carId());
-            Rental rental = new Rental(customer, car, rentalDTO.mileage());
+            Rental rental = new Rental(customer, car, rentalDTO.mileage(), rentalDTO.rentalId());
             rentalRepository.save(rental);
             if (rentalDTO.rentalId() == null) {
                 return new ResponseEntity<>(HttpStatus.CREATED);

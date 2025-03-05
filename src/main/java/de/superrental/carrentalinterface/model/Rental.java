@@ -14,7 +14,7 @@ import lombok.Setter;
 public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rentalId;
+    private Integer rentalId;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
@@ -27,9 +27,10 @@ public class Rental {
     @Column(nullable = false)
     private Integer mileage;
 
-    public Rental(Customer customer, Car car, Integer mileage) {
+    public Rental(Customer customer, Car car, Integer mileage, Integer rentalId) {
         this.customer = customer;
         this.car = car;
         this.mileage = mileage;
+        this.rentalId = rentalId;
     }
 }

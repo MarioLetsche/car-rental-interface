@@ -4,5 +4,5 @@ public record RentalDTO(
         Long customerId,
         Long carId,
         Integer mileage,
-        Long rentalId
+        Integer rentalId
 ) {}
